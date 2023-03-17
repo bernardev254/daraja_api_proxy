@@ -21,6 +21,7 @@ class ProductionConfig(Config):
     DEBUG = True
     URL = os.getenv("URL")
     TOKEN = os.getenv("TOKEN")
+    CLIENT_ID = os.getenv("CLIENT_ID")
 
 
 config_by_name = dict(
