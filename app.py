@@ -44,10 +44,10 @@ def refresh_token():
     }
     response = requests.get(url, headers=headers, data=payload)
     resp = response.json()
-    new_token = resp
+    
 
     # Return the new access token in the response body
-    return jsonify({'access_token': new_token})
+    return jsonify(resp)
 
 
 if __name__ == "__main__":
