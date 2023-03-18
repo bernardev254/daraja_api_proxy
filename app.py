@@ -31,13 +31,13 @@ def proxyAuth():
 @app.route('/refresh_token', methods=['POST'])
 def refresh_token():
     # Extract the expired access token from the request body
-    expired_token = request.form.get('access_token')
+    #expired_token = request.get_json('refresh_token')
 
     # TODO: Use your authentication logic to obtain a new access token
     url = config_by_name["prod"].URL
     token = config_by_name["prod"].TOKEN
-    client_id = config_by_name["prod"].CLIENT_ID
-    client_id_from_request = request.form.get('client_id')
+    #client_id = config_by_name["prod"].CLIENT_ID
+    #client_id_from_request = request.form.get('client_id')
     payload={}
     headers = {
         "Authorization": "Basic {}".format(token)
