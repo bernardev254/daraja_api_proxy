@@ -9,27 +9,6 @@ load_dotenv()
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(config_by_name["prod"])
 
-@app.route("/proxyAuth",methods=["POST","GET","OPTIONS"])
-@cross_origin(origins='*',methods=['POST','OPTIONS',])
-def proxyAuth():
-    url = config_by_name["prod"].URL
-    token = config_by_name["prod"].TOKEN
-    client_id = config_by_name["prod"].CLIENT_ID
-    #client_id_from_request = request.args.get('client_id')
-    client_id_from_request = request.form.get('client_id')
-    payload={}
-    headers = {
-        "Authorization": "Basic {}".format(token)
-    }
-    same = (client_id == client_id_from_request)
-    if same:
-        response = requests.get(url, headers=headers, data=payload)
-        resp = response.json()
-        resp["refresh_token"] = resp.get('access_token')
-        return jsonify(resp), 200
-    return jsonify({"msg":"Unauthorized"}),401
-
-
 @app.route('/generate', methods=['POST', 'GET','OPTIONS'])
 @cross_origin(origins='*',methods=['POST','GET','OPTIONS',])
 def generate():
